@@ -9,4 +9,8 @@ class Expense < ApplicationRecord
    ["amount", "category_id", "created_at", "description", "expense_date", "id", "id_value", "one_off", "purchase_date", "updated_at"]
   end
 
+  def self.for_current_month
+
+  end
+
 end
