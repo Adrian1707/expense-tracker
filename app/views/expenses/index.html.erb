@@ -1,3 +1,10 @@
+<h1 class="expenses-title">Expenses</h1>
 <div id='regular-expenses-bar-chart'>
-  <%= react_component("HelloWorld", { greeting: "Hello from react-rails.", expenseData: @grouped_expenses }) %>
+  <h3>Expenses today: £<%= @expenses_today %></h3>
+  <%= react_component("HelloWorld", {
+    greeting: "Hello from react-rails.",
+    expenseData: @grouped_expenses,
+    categoryData: @grouped_by_category_percentages,
+    categoryValues: @grouped_by_category_values
+  }) %>
 </div>
