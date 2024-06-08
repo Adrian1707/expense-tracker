@@ -6,7 +6,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
 ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend, annotationPlugin, ChartDataLabels);
 
-const HelloWorld = (props) => {
+const Dashboard = (props) => {
   ChartJS.overrides.pie.plugins.legend.display = false
   ChartJS.defaults.set('plugins.datalabels', {
     display: false
@@ -51,6 +51,9 @@ const HelloWorld = (props) => {
   };
 
   const pieOptions = {
+    animation: {
+      animateRotate: true
+    },
     plugins: {
       datalabels: {
         formatter: function(value, context) {
@@ -99,7 +102,9 @@ const HelloWorld = (props) => {
   return(
     <div>
       <Bar data={data} options={options} />;
-      <Pie data={pieData} options={pieOptions} />;
+      <div class="my-pie-chart">
+        <Pie data={pieData} options={pieOptions} />;
+      </div>
       <table className="expenses-table">
         <thead>
           <tr>
@@ -111,7 +116,7 @@ const HelloWorld = (props) => {
           {Object.entries(props.categoryValues).map(([category, amount]) => (
             <tr key={category}>
               <td>{category}</td>
-              <td>${amount.toFixed(2)}</td>
+              <td>£{amount.toFixed(2)}</td>
             </tr>
           ))}
         </tbody>
@@ -121,8 +126,8 @@ const HelloWorld = (props) => {
 
 }
 
-HelloWorld.propTypes = {
+Dashboard.propTypes = {
   greeting: PropTypes.string
 };
 
-export default HelloWorld
+export default Dashboard

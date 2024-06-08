@@ -1,7 +1,7 @@
 <h1 class="expenses-title">Expenses</h1>
 <div id='regular-expenses-bar-chart'>
   <h3>Expenses today: £<%= @expenses_today %></h3>
-  <%= react_component("HelloWorld", {
+  <%= react_component("Dashboard", {
     greeting: "Hello from react-rails.",
     expenseData: @grouped_expenses,
     categoryData: @grouped_by_category_percentages,
