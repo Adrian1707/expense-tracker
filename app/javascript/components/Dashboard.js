@@ -59,7 +59,7 @@ const Dashboard = (props) => {
       }
       {
         totalMonthlyExpenses &&
-        <h3>{`Total monthly expenses: £${totalMonthlyExpenses}`} </h3>
+        <h3>{`Total monthly expenses so far: £${totalMonthlyExpenses}`} </h3>
       }
       <select value={month} onChange={handleMonthChange}>
         <option value="">Select a month</option>

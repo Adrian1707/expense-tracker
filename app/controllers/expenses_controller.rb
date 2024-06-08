@@ -1,9 +1,9 @@
 class ExpensesController < ApplicationController
 
   def index
-    month = params['month'].present? ? params['month'] : Date.current.month
-    @grouped_expenses_by_expense_date = Expense.current_month_grouped_by_expense_date(month)
-    grouped_expenses_by_category = Expense.current_month_grouped_by_category(month)
+    @month = params['month'].present? ? params['month'] : Date.current.month
+    @grouped_expenses_by_expense_date = Expense.current_month_grouped_by_expense_date(@month)
+    grouped_expenses_by_category = Expense.current_month_grouped_by_category(@month)
     monthly_expenses = @grouped_expenses_by_expense_date.values.flatten.sum {|e| e['amount']}
 
     @grouped_by_category_percentages = grouped_expenses_by_category.transform_values do |expenses|
@@ -13,7 +13,7 @@ class ExpensesController < ApplicationController
     @grouped_by_category_values = grouped_expenses_by_category.transform_values do |expenses|
       sum = expenses.sum { |expense| expense['amount'] }
     end.sort_by  {|k,v| v}.reverse.to_h
-    if month.to_i == Date.current.month
+    if @month.to_i == Date.current.month
       @expenses_today = @grouped_expenses_by_expense_date[Date.today.strftime("%d/%m/%Y")].sum {|e| e['category_title'] != 'Accommodation' ?  e['amount'] : 0}
     end
     @total_monthly_expenses = @grouped_expenses_by_expense_date.values.flatten.sum {|expense| expense['amount']}.round(2)
@@ -26,7 +26,7 @@ class ExpensesController < ApplicationController
         category_values: @grouped_by_category_values,
         expensesToday: @expenses_today,
         totalMonthlyExpenses: @total_monthly_expenses,
-        month: params['month']
+        month: @month
       } }
     end
   end
