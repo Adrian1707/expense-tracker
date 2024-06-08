@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Bar, Pie } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
+import BarChart from './BarChart'
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
@@ -101,8 +102,8 @@ const Dashboard = (props) => {
   };
   return(
     <div>
-      <Bar data={data} options={options} />;
-      <div class="my-pie-chart">
+      <BarChart expenseData={props.expenseData} />
+      <div>
         <Pie data={pieData} options={pieOptions} />;
       </div>
       <table className="expenses-table">
@@ -125,9 +126,5 @@ const Dashboard = (props) => {
   )
 
 }
-
-Dashboard.propTypes = {
-  greeting: PropTypes.string
-};
 
 export default Dashboard
