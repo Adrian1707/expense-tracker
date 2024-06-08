@@ -33,14 +33,12 @@ const Dashboard = (props) => {
   };
 
   const fetchData = (month) => {
-    // // Make API call with the selected month as a query parameter
     fetch(`http://localhost:3000/expenses/index?month=${month}`, {
       headers: {
         'Accept': 'application/json'
       }
     }).then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setExpensesByExpenseDate(data.expenses_by_expense_date)
         setExpensesByCategory(data.expenses_by_category_percentages)
         setCategoryValues(data.category_values)

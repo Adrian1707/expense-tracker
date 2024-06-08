@@ -1,8 +1,6 @@
 class ExpensesController < ApplicationController
 
   def index
-    puts("CALLING INDEX")
-    puts "PARAMS"
     month = params['month'].present? ? params['month'] : Date.current.month
     @grouped_expenses_by_expense_date = Expense.current_month_grouped_by_expense_date(month)
     grouped_expenses_by_category = Expense.current_month_grouped_by_category(month)
