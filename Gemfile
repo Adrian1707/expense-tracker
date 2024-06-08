@@ -16,7 +16,6 @@ gem "puma", ">= 5.0"
 
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
 gem "importmap-rails"
-gem 'activeadmin'
 gem 'devise'
 gem "sassc-rails"
 # Hotwire's SPA-like page accelerator [https://turbo.hotwired.dev]
@@ -68,7 +67,3 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
-
-gem "shakapacker", "= 8.0"
-
-gem "react-rails", "= 3.2"
