@@ -1,9 +1,9 @@
 <h1 class="expenses-title">Expenses</h1>
 <div id='regular-expenses-bar-chart'>
-  <h3>Expenses today: £<%= @expenses_today %></h3>
+  <h3>Non-accomodation expenses today: £<%= @expenses_today %></h3>
   <%= react_component("Dashboard", {
-    expenseData: @grouped_expenses,
-    categoryData: @grouped_by_category_percentages,
+    expensesByExpenseDate: @grouped_expenses_by_expense_date,
+    expensesByCategory: @grouped_by_category_percentages,
     categoryValues: @grouped_by_category_values
   }) %>
 </div>

@@ -7,14 +7,14 @@ ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Le
 
 const BarChart = (props) => {
   ChartJS.overrides.pie.plugins.legend.display = false
-  const labels = Object.keys(props.expenseData);
+  const labels = Object.keys(props.expensesByExpenseDate);
 
   const data = {
     labels,
     datasets: [
       {
         label: 'Expenses',
-        data: labels.map(date => props.expenseData[date].reduce((total, expense) => total + expense.amount, 0)),
+        data: labels.map(date => props.expensesByExpenseDate[date].reduce((total, expense) => total + expense.amount, 0)),
         backgroundColor: 'rgba(75, 192, 192, 0.6)',
       },
     ],

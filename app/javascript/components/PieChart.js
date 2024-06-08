@@ -1,7 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import BarChart from './BarChart'
-import PieChart from './PieChart'
+import { Pie } from 'react-chartjs-2';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Tooltip, Legend } from 'chart.js';
@@ -12,9 +11,7 @@ const Dashboard = (props) => {
   ChartJS.defaults.set('plugins.datalabels', {
     display: false
   });
-  const labels = Object.keys(props.expensesByExpenseDate);
-  console.log(Object.values(props.expensesByCategory))
-  const pieData = {
+  const data = {
     labels: Object.keys(props.expensesByCategory),
     datasets: [
       {
@@ -40,18 +37,8 @@ const Dashboard = (props) => {
     ],
   };
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: 'Expenses',
-        data: labels.map(date => props.expensesByExpenseDate[date].reduce((total, expense) => total + expense.amount, 0)),
-        backgroundColor: 'rgba(75, 192, 192, 0.6)',
-      },
-    ],
-  };
 
-  const pieOptions = {
+  const options = {
     animation: {
       animateRotate: true
     },
@@ -71,56 +58,8 @@ const Dashboard = (props) => {
     },
   };
 
-  const options = {
-    scales: {
-      x: {
-        type: 'category',
-      },
-      y: {
-        type: 'linear',
-        beginAtZero: true,
-      },
-    },
-    plugins: {
-    annotation: {
-      annotations: {
-        line1: {
-          type: 'line',
-          yMin: 80,
-          yMax: 80,
-          borderColor: 'rgb(255, 0, 0)',
-          borderWidth: 2,
-          label: {
-            enabled: true,
-            content: 'Budget',
-            position: 'start'
-          }
-        }
-      }
-    }
-  }
-  };
   return(
-    <div>
-      <BarChart expensesByExpenseDate={props.expensesByExpenseDate} />
-      <PieChart expensesByCategory={props.expensesByCategory} />
-      <table className="expenses-table">
-        <thead>
-          <tr>
-            <th>Category</th>
-            <th>Amount</th>
-          </tr>
-        </thead>
-        <tbody>
-          {Object.entries(props.categoryValues).map(([category, amount]) => (
-            <tr key={category}>
-              <td>{category}</td>
-              <td>£{amount.toFixed(2)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <Pie data={data} options={options} />
   )
 
 }
