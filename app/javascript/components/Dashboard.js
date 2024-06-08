@@ -5,6 +5,8 @@ import Table from './Table'
 
 const Dashboard = (props) => {
   const [month, setMonth] = useState(props.month);
+  const [expensesToday, setExpensesToday] = useState(props.expensesToday)
+  const [totalMonthlyExpenses, setTotalMonthlyExpenses] = useState(props.totalMonthlyExpenses)
   const [expensesByExpenseDate, setExpensesByExpenseDate] = useState(props.expensesByExpenseDate)
   const [expensesByCategory, setExpensesByCategory] = useState(props.expensesByCategory)
   const [categoryValues, setCategoryValues] = useState(props.categoryValues)
@@ -38,9 +40,12 @@ const Dashboard = (props) => {
       }
     }).then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setExpensesByExpenseDate(data.expenses_by_expense_date)
         setExpensesByCategory(data.expenses_by_category_percentages)
         setCategoryValues(data.category_values)
+        setExpensesToday(data.expensesToday)
+        setTotalMonthlyExpenses(data.totalMonthlyExpenses)
       })
       .catch((error) => {
         // Handle any errors
@@ -50,6 +55,14 @@ const Dashboard = (props) => {
 
   return(
     <div>
+      {
+        expensesToday &&
+          <h3>{`Non-accomodation expenses today: £${expensesToday}`}</h3>
+      }
+      {
+        totalMonthlyExpenses &&
+        <h3>{`Total monthly expenses: £${totalMonthlyExpenses}`} </h3>
+      }
       <select value={month} onChange={handleMonthChange}>
         <option value="">Select a month</option>
         {months.map((month) => (
